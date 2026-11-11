@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <DHT.h>
 
+
 const int DHT_PIN = 32;  // aus der Pintabelle
 const int LED_PIN = 14;  // aus der Pintabelle
 const float GRENZWERT_FEUCHTE = 60.0; // in Prozent
