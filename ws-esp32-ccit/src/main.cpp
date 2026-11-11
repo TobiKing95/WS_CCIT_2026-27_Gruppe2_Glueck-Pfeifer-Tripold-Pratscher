@@ -1,25 +1,33 @@
 #include <Arduino.h>
+#include <DHT.h>
 
-unsigned long letzteAusgabe = 0;
-int zaehler = 0;
+const int DHT_PIN = 32;  // aus der Pintabelle
+const int LED_PIN = 14;  // aus der Pintabelle
+const float GRENZWERT_FEUCHTE = 60.0; // in Prozent
+const unsigned long INTERVALL_MS = 2000; // der DHT22 misst höchstens alle 2 s
+
+DHT dht(DHT_PIN, DHT22);
+unsigned long letzteMessung = 0;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("ESP32 bereit.");
+  pinMode(LED_PIN, OUTPUT);
+  dht.begin();
 }
 
 void loop() {
-  // 1. Alles, was du im Monitor tippst, wird zurückgeschickt
-  if (Serial.available()) {
-    String eingabe = Serial.readStringUntil('\n');
-    eingabe.trim();
-    Serial.println("Du hast gesendet: " + eingabe);
-  }
+  if (millis() - letzteMessung >= INTERVALL_MS) {
+    letzteMessung = millis();
 
-  // 2. Jede Sekunde meldet sich der ESP32 von selbst
-  if (millis() - letzteAusgabe >= 1000) {
-    letzteAusgabe = millis();
-    zaehler++;
-    Serial.println("Lebenszeichen Nr. " + String(zaehler));
+    float feuchte = dht.readHumidity();
+    float temperatur = dht.readTemperature();
+
+    if (isnan(feuchte) || isnan(temperatur)) {
+      Serial.println("Fehler: Sensor antwortet nicht");
+      digitalWrite(LED_PIN, LOW);
+    } else {
+      Serial.printf("T = %.1f °C rF = %.1f %%\n", temperatur, feuchte);
+      digitalWrite(LED_PIN, feuchte > GRENZWERT_FEUCHTE ? HIGH : LOW);
+    }
   }
 }
