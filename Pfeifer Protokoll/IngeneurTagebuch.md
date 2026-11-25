@@ -21,4 +21,11 @@
 * Hilfestellung bei Programmierung
 * Masterprotokoll weiter aufgebaut
 
+# 25.11.2026
+
+* Arbeitsmaterialien wurden besorgt(ESP32, Jumper-Drähte, LEDs, 270 Ohm Widerständ, Steckbrett, Summmer, Taster)
+* Arbeitsplatz aufgebaut(Steckbrett, Laptop, Verbindungen)
+* Schaltung aufgebaut(ESP, LED, Verbindungen)
+* Hilfestellung bei Programmierung
+* Masterprotokoll weiter aufgebaut
 
