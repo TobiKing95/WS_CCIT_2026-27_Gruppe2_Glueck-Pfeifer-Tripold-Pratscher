@@ -15,3 +15,15 @@
 - Fehler beim Uploaden: Sensor reagiert nicht 
 - Lösung Sensor + bei 3v3 anschließen und - zu GND 
 - Schritt 5 implementiert mit EBENE 
+
+# 18.11.2026
+- Hardware bersorgt
+- Schritt 6 bei Ausbaustufe1 implementiert
+- Code geuploadet
+- Zeit-Messungen für digitalwrite, gpio_set_level und Register durchgeführt
+- Abschließen Zeiten notiert:
+digitalwrite: 68ms
+gpio_set_level: 59ms
+Register: 10ms 
+
+
